@@ -1,0 +1,7 @@
+@top Script { statement }
+
+statement { Null }
+
+@tokens {
+  Null  { "NULL" }
+}
