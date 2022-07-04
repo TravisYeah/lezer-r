@@ -1,7 +1,0 @@
-# Null
-
-NULL
-
-==>
-
-Script(Null)
