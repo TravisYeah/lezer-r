@@ -30,6 +30,6 @@
     "build": "lezer-generator src/r.grammar -o src/parser && rollup -c",
     "build-debug": "lezer-generator src/r.grammar --names -o src/parser && rollup -c",
     "prepare": "npm run build",
-    "test": "npm run build && mocha test/test-r.js"
+    "test": "mocha test/test-r.js"
   }
 }
