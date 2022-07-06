@@ -140,3 +140,7 @@ NaN { kw<"NaN"> }
     "'" (![\\\n'] | "\\" _)* "'"?
   }
 }
+
+@external propSource rHighlight from "./highlight"
+
+@detectDelim
