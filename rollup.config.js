@@ -1,15 +1,17 @@
-import {nodeResolve} from "@rollup/plugin-node-resolve"
+import { nodeResolve } from "@rollup/plugin-node-resolve";
+import copy from "rollup-plugin-copy";
 
 export default {
   input: "./src/parser.js",
   output: [
     { format: "cjs", file: "./dist/index.cjs" },
-    { format: "es", file: "./dist/index.es.js" }
+    { format: "es", file: "./dist/index.es.js" },
   ],
   external(id) {
-    return !/^[\.\/]/.test(id)
+    return !/^[\.\/]/.test(id);
   },
   plugins: [
-    nodeResolve()
-  ]
-}
+    nodeResolve(),
+    copy({ targets: [{ src: "src/highlight.js", dest: "dist/" }] }),
+  ],
+};
