@@ -1,6 +1,6 @@
 {
   "name": "lezer-r",
-  "version": "0.1.0-0",
+  "version": "0.1.0-1",
   "description": "lezer-based R grammar",
   "main": "dist/index.cjs",
   "type": "module",
