@@ -1,8 +1,9 @@
 import { styleTags, tags as t } from "@lezer/highlight";
 
 export const rHighlight = styleTags({
-  "function repeat while for if else return break next in": t.controlKeyword,
+  "repeat while for if else return break next in": t.controlKeyword,
   "True False": t.bool,
+  function: t.definitionKeyword,
   Null: t.null,
   "FunctionCall/VariableName": t.function(t.variableName),
   "FunctionDeclaration/VariableName": t.function(t.definition(t.variableName)),
