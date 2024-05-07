@@ -19,12 +19,12 @@ fn <- function(arg1, arg2 = xyz, ...) {
 
 ==>
 
-Script(FunctionDeclaration(function,ParamList,Block),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(ReturnStatement(return,Identifier)))),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(ReturnStatement(return,Identifier)))),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(ReturnStatement(return,Identifier)))),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,NamedArg(Identifier),Numeric,"..."),Block(ReturnStatement(return,Identifier)))),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,NamedArg(Identifier),Identifier,"..."),Block(ReturnStatement(return,Identifier)))))
+Script(FunctionDeclaration(function,ParamList,Block(BlockOpenBrace,BlockCloseBrace)),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(BlockOpenBrace,ReturnStatement(return,Identifier),BlockCloseBrace))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(BlockOpenBrace,ReturnStatement(return,Identifier),BlockCloseBrace))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(BlockOpenBrace,ReturnStatement(return,Identifier),BlockCloseBrace))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,NamedArg(Identifier),Numeric,"..."),Block(BlockOpenBrace,ReturnStatement(return,Identifier),BlockCloseBrace))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,NamedArg(Identifier),Identifier,"..."),Block(BlockOpenBrace,ReturnStatement(return,Identifier),BlockCloseBrace))))
 
 # Function Call
 
@@ -36,7 +36,7 @@ fn(arg1, arg2 = 123, arg3 = , "arg4" = xyz, ...)
 
 ==>
 
-Script(FunctionCall(FunctionDeclaration(function,ParamList,Block), ArgList),
+Script(FunctionCall(FunctionDeclaration(function,ParamList,Block(BlockOpenBrace,BlockCloseBrace)), ArgList),
   FunctionCall(Identifier,ArgList),
   FunctionCall(Identifier,ArgList(Identifier,Identifier)),
   FunctionCall(Identifier,ArgList(Identifier,NamedArg(Identifier),Numeric,NamedArg(Identifier),NamedArg(String),Identifier,"...")),
@@ -49,8 +49,8 @@ if (T) {1}
 
 ==>
 
-Script(IfStatement(if,True(T),Block(Numeric),else,Block(Numeric)),
-  IfStatement(if,True(T),Block(Numeric)))
+Script(IfStatement(if,True(T),Block(BlockOpenBrace,Numeric,BlockCloseBrace),else,Block(BlockOpenBrace,Numeric,BlockCloseBrace)),
+  IfStatement(if,True(T),Block(BlockOpenBrace,Numeric,BlockCloseBrace)))
 
 # Repeat
 
@@ -62,11 +62,11 @@ repeat {break()}
 
 ==>
 
-Script(RepeatStatement(repeat,Block(Numeric)),
-  RepeatStatement(repeat,Block(NextStatement(next))),
-  RepeatStatement(repeat,Block(NextStatement(next))),
-  RepeatStatement(repeat,Block(BreakStatement(break))),
-  RepeatStatement(repeat,Block(BreakStatement(break))))
+Script(RepeatStatement(repeat,Block(BlockOpenBrace,Numeric,BlockCloseBrace)),
+  RepeatStatement(repeat,Block(BlockOpenBrace,NextStatement(next),BlockCloseBrace)),
+  RepeatStatement(repeat,Block(BlockOpenBrace,NextStatement(next),BlockCloseBrace)),
+  RepeatStatement(repeat,Block(BlockOpenBrace,BreakStatement(break),BlockCloseBrace)),
+  RepeatStatement(repeat,Block(BlockOpenBrace,BreakStatement(break),BlockCloseBrace)))
 
 # While
 
@@ -74,7 +74,7 @@ while(T) {1}
 
 ==>
 
-Script(WhileStatement(while,True(T),Block(Numeric)))
+Script(WhileStatement(while,True(T),Block(BlockOpenBrace,Numeric,BlockCloseBrace)))
 
 # For
 
@@ -82,7 +82,7 @@ for(x in xs) {1}
 
 ==>
 
-Script(ForStatement(for,Identifier,in,Identifier,Block(Numeric)))
+Script(ForStatement(for,Identifier,in,Identifier,Block(BlockOpenBrace,Numeric,BlockCloseBrace)))
 
 # Indexing
 

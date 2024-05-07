@@ -34,6 +34,7 @@ compoundExpression {
   RepeatStatement { kw<"repeat"> Block } |
   WhileStatement { kw<"while"> "(" expression ")" Block } |
   ForStatement { kw<"for"> "(" expression kw<"in"> expression ")" Block } |
+  Block |
   IndexStatement |
   VariableAssignment { Assignable !assign AssignmentOperator expression } |
   BinaryStatement {
@@ -66,8 +67,11 @@ ReturnStatement {
 }
 
 Block {
-  "{" (expression | ReturnStatement | BreakStatement | NextStatement)* "}"
+  BlockOpenBrace (expression | ReturnStatement | BreakStatement | NextStatement)* BlockCloseBrace
 }
+
+BlockOpenBrace { "{" }
+BlockCloseBrace { "}" }
 
 Assignable { (Identifier | IndexStatement | FunctionCall) }
 
