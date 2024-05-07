@@ -113,8 +113,7 @@ NaN { kw<"NaN"> }
     (@asciiLetter | "_")+ ( @asciiLetter | @digit | "." | "_")* |
     "." ( @asciiLetter | "_")? ( @asciiLetter | @digit | "." | "_")* |
     ".." ![0-9] ( @asciiLetter | @digit | "." | "_")* |
-    "..." ( @asciiLetter | @digit | "." | "_")+ |
-    "`" ![`]+ "`"
+    "..." ( @asciiLetter | @digit | "." | "_")+
   }
   Integer {
     @digit+ "."? "L" |
@@ -137,7 +136,8 @@ NaN { kw<"NaN"> }
   @precedence { Complex, Numeric, Identifier }
   String {
     '"' (![\\\n"] | "\\" _)* '"'? |
-    "'" (![\\\n'] | "\\" _)* "'"?
+    "'" (![\\\n'] | "\\" _)* "'"? |
+    "`" ![`]+ "`"
   }
 }
 
