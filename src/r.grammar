@@ -55,9 +55,11 @@ kw<term> { @specialize[@name={term}]<Identifier, term> }
 
 FunctionCall { expression !call ArgList | String !call ArgList }
 
-ArgList { "(" commaSep<expression> ")" }
+ArgList { "(" commaSep<expression | kw<"..."> | NamedArg<Identifier | String> expression?> ")" }
 
-ParamList { "(" commaSep<Identifier | kw<"..."> | Identifier "=" expression> ")" }
+ParamList { "(" commaSep<Identifier | kw<"..."> | NamedArg<Identifier> expression> ")" }
+
+NamedArg<type> { (type) !assign "=" }
 
 ReturnStatement {
   kw<"return"> "(" expression? ")"

@@ -10,24 +10,36 @@ fn = function(arg1, arg2, ...) {
 fn <<- function(arg1, arg2, ...) {
   return(arg1)
 }
+fn <- function(arg1, arg2 = 123, ...) {
+  return(arg1)
+}
+fn <- function(arg1, arg2 = xyz, ...) {
+  return(arg1)
+}
 
 ==>
 
 Script(FunctionDeclaration(function,ParamList,Block),
   VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(ReturnStatement(return,Identifier)))),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier"..."),Block(ReturnStatement(return,Identifier)))),
-  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier"..."),Block(ReturnStatement(return,Identifier)))))
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(ReturnStatement(return,Identifier)))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,Identifier,"..."),Block(ReturnStatement(return,Identifier)))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,NamedArg(Identifier),Numeric,"..."),Block(ReturnStatement(return,Identifier)))),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionDeclaration(function,ParamList(Identifier,NamedArg(Identifier),Identifier,"..."),Block(ReturnStatement(return,Identifier)))))
 
 # Function Call
 
 function() {}()
 fn()
+fn(arg1, arg2, ...)
+fn(arg1, arg2 = 123, arg3 = , "arg4" = xyz, ...)
 "fn"()
 
 ==>
 
 Script(FunctionCall(FunctionDeclaration(function,ParamList,Block), ArgList),
   FunctionCall(Identifier,ArgList),
+  FunctionCall(Identifier,ArgList(Identifier,Identifier)),
+  FunctionCall(Identifier,ArgList(Identifier,NamedArg(Identifier),Numeric,NamedArg(Identifier),NamedArg(String),Identifier,"...")),
   FunctionCall(String,ArgList))
 
 # If Else
