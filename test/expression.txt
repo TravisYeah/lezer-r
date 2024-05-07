@@ -76,13 +76,31 @@ Script(ForStatement(for,Identifier,in,Identifier,Block(Numeric)))
 
 ls[1]
 ls[[1]]
-ls$x
 
 ==>
 
 Script(IndexStatement(Identifier,Numeric),
-  IndexStatement(Identifier,Numeric),
-  IndexStatement(Identifier,Identifier))
+  IndexStatement(Identifier,Numeric))
+
+# Component/Slot Extraction
+
+foo$x
+foo@x
+
+==>
+
+Script(BinaryStatement(Identifier,ExtractionOp,Identifier),
+  BinaryStatement(Identifier,ExtractionOp,Identifier))
+
+# Namespace operation
+
+foo::x
+foo:::x
+
+==>
+
+Script(BinaryStatement(Identifier,NamespaceOp,Identifier),
+  BinaryStatement(Identifier,NamespaceOp,Identifier))
 
 # Binary Expression
 

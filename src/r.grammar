@@ -8,6 +8,8 @@
   call @right,
   break @left,
   next @left,
+  ns @left,
+  extract @left,
   exp @left,
   times @left,
   matrix @left,
@@ -35,6 +37,8 @@ compoundExpression {
   IndexStatement |
   VariableAssignment { Assignable !assign AssignmentOperator expression } |
   BinaryStatement {
+    expression !ns NamespaceOp<"::" | ":::"> expression |
+    expression !extract ExtractionOp<"$" | "@"> expression |
     expression !exp ArithOp<"^"> expression |
     expression !times ArithOp<"*" | "/" | "%%"> expression |
     expression !plus ArithOp<"+" | "-"> expression |
@@ -65,7 +69,7 @@ Block {
 
 Assignable { (Identifier | IndexStatement | FunctionCall) }
 
-IndexStatement { expression "[" commaSep<expression> "]" | expression "[[" commaSep<expression> "]]" | expression "$" (Identifier | "\"" Identifier "\"") }
+IndexStatement { expression "[" commaSep<expression> "]" | expression "[[" commaSep<expression> "]]" }
 
 BreakStatement { !break kw<"break"> | kw<"break"> "(" ")" }
 
@@ -90,6 +94,10 @@ CompareOp<expr> { expr }
 MatrixOp<expr> { expr }
 
 LogicOp<expr> { expr }
+
+ExtractionOp<expr> { expr }
+
+NamespaceOp<expr> { expr }
 
 AssignmentOperator { "=" | "<-" | "->" | "<<-" | "->>" }
 

@@ -14,6 +14,7 @@ export const rHighlight = styleTags({
   BitOp: t.bitwiseOperator,
   CompareOp: t.compareOperator,
   MatrixOp: t.ArithOp,
+  "ExtractionOp NamespaceOp": t.operator,
   AssignmentOperator: t.definitionOperator,
   "...": t.punctuation,
   "( )": t.paren,
