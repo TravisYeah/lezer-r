@@ -6,7 +6,8 @@
 "a\"b"
 '\\'
 "\\"
+`foo bar baz`
 
 ===>
 
-Script(String, String, String, String, String, String)
+Script(String, String, String, String, String, String, String)
