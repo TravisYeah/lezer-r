@@ -33,6 +33,7 @@ fn()
 fn(arg1, arg2, ...)
 fn(arg1, arg2 = 123, arg3 = , "arg4" = xyz, ...)
 "fn"()
+foo <- fn(arg1, ...)
 
 ==>
 
@@ -40,7 +41,8 @@ Script(FunctionCall(FunctionDeclaration(function,ParamList,Block(BlockOpenBrace,
   FunctionCall(Identifier,ArgList),
   FunctionCall(Identifier,ArgList(Identifier,Identifier)),
   FunctionCall(Identifier,ArgList(Identifier,NamedArg(Identifier),Numeric,NamedArg(Identifier),NamedArg(String),Identifier,"...")),
-  FunctionCall(String,ArgList))
+  FunctionCall(String,ArgList),
+  VariableAssignment(Assignable(Identifier),AssignmentOperator,FunctionCall(Identifier,ArgList(Identifier,"..."))))
 
 # If Else
 
