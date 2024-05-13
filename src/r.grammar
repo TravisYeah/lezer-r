@@ -4,8 +4,8 @@
 
 @precedence {
   else @right,
-  assign @right,
   call @right,
+  assign @right,
   break @left,
   next @left,
   ns @left,
